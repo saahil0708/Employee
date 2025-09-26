@@ -1,10 +1,6 @@
-import React from "react";
-import Layout from "./Layout/Layout";
+import { RouterProvider } from "react-router-dom";
+import router from "./Routes/Routes";
 
 export default function App() {
-    return (
-        <React.Fragment>
-            <Layout />
-        </React.Fragment>
-    )
+    return <RouterProvider router={router} />;
 }

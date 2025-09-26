@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     LayoutDashboard,
     Users,
@@ -15,73 +15,87 @@ import {
     MessageSquare
 } from 'lucide-react';
 
+import { Link, useLocation } from 'react-router-dom';
+
 interface SidebarProps {
     isCollapsed: boolean;
     onToggle: () => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
+    const location = useLocation();
     const [activeItem, setActiveItem] = useState('dashboard');
 
     const menuItems = [
-        { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, badge: null },
-        { id: 'employees', label: 'All Employees', icon: Users, badge: '247' },
-        { id: 'departments', label: 'Departments', icon: Building2, badge: '12' },
-        { id: 'attendance', label: 'Attendance', icon: Clock, badge: null },
-        { id: 'leave', label: 'Leave Requests', icon: Calendar, badge: '8' },
-        { id: 'payroll', label: 'Payroll', icon: DollarSign, badge: null },
-        { id: 'documents', label: 'Documents', icon: FileText, badge: null },
-        { id: 'communication', label: 'Messages', icon: MessageSquare, badge: '3' },
-        { id: 'reports', label: 'Reports', icon: BarChart3, badge: null },
+        { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, badge: null, route: '/' },
+        { id: 'employees', label: 'All Employees', icon: Users, badge: '247', route: '/employees' },
+        { id: 'departments', label: 'Departments', icon: Building2, badge: '12', route: '/departments' },
+        { id: 'attendance', label: 'Attendance', icon: Clock, badge: null, route: '/attendance' },
+        { id: 'leave', label: 'Leave Requests', icon: Calendar, badge: '8', route: '/leave' },
+        { id: 'payroll', label: 'Payroll', icon: DollarSign, badge: null, route: '/payroll' },
+        { id: 'documents', label: 'Documents', icon: FileText, badge: null, route: '/documents' },
+        { id: 'communication', label: 'Messages', icon: MessageSquare, badge: '3', route: '/communication' },
+        { id: 'reports', label: 'Reports', icon: BarChart3, badge: null, route: '/reports' },
     ];
 
     const bottomMenuItems = [
-        { id: 'settings', label: 'Settings', icon: Settings, badge: null },
-        { id: 'profile', label: 'My Profile', icon: User, badge: null },
+        { id: 'settings', label: 'Settings', icon: Settings, badge: null, route: '/settings' },
+        { id: 'profile', label: 'My Profile', icon: User, badge: null, route: '/profile' },
     ];
 
+    // Update active item based on current route
+    useEffect(() => {
+        const allItems = [...menuItems, ...bottomMenuItems];
+        const currentItem = allItems.find(item => item.route === location.pathname);
+        if (currentItem) {
+            setActiveItem(currentItem.id);
+        }
+    }, [location.pathname]);
+
     const MenuItem = ({ item, isBottom = false }: { item: any; isBottom?: boolean }) => (
-        <button
-            key={item.id}
-            onClick={() => setActiveItem(item.id)}
-            className={`
+        <Link to={item.route}>
+            <button
+                key={item.id}
+                onClick={() => setActiveItem(item.id)}
+                className={`
         w-full flex items-center gap-3 px-4 py-3 text-left transition-all duration-200 rounded-lg group
         ${activeItem === item.id
-                    ? 'bg-blue-50 text-blue-600 border-r-2 border-blue-600'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                }
+                        ? 'bg-blue-50 text-blue-600 border-r-2 border-blue-600'
+                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'}
         ${isCollapsed ? 'justify-center px-3' : ''}
       `}
-        >
-            <item.icon
-                size={20}
-                className={`
+            >
+                <item.icon
+                    size={20}
+                    className={`
           transition-colors duration-200 flex-shrink-0
           ${activeItem === item.id ? 'text-blue-600' : 'text-gray-500 group-hover:text-gray-700'}
         `}
-            />
-            {!isCollapsed && (
-                <>
-                    <span className="font-medium text-sm">{item.label}</span>
-                    {item.badge && (
-                        <span className={`
-              ml-auto px-2 py-0.5 text-xs rounded-full font-medium
-              ${activeItem === item.id
-                                ? 'bg-blue-100 text-blue-700'
-                                : 'bg-gray-100 text-gray-600 group-hover:bg-gray-200'
-                            }
-            `}>
-                            {item.badge}
-                        </span>
-                    )}
-                </>
-            )}
-        </button>
+                />
+                {!isCollapsed && (
+                    <>
+                        <span className="font-medium text-sm">{item.label}</span>
+                        {item.badge && (
+                            <span
+                                className={`
+                ml-auto px-2 py-0.5 text-xs rounded-full font-medium
+                ${activeItem === item.id
+                                        ? 'bg-blue-100 text-blue-700'
+                                        : 'bg-gray-100 text-gray-600 group-hover:bg-gray-200'}
+              `}
+                            >
+                                {item.badge}
+                            </span>
+                        )}
+                    </>
+                )}
+            </button>
+        </Link>
     );
 
     return (
         <div className={`
-      fixed left-0 top-0 h-screen bg-white border-r border-gray-200 transition-all duration-300 ease-in-out flex flex-col z-50
+      fixed left-0 top-0 h-screen bg-white border-r border-gray-200 transition-all duration-300 ease-in-out flex flex-col z-[100]
       ${isCollapsed ? 'w-16' : 'w-64'}
     `}>
             {/* Header */}
