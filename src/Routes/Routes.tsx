@@ -3,6 +3,9 @@ import Layout from '../Layout/Layout';
 import HRDashboard from '../Pages/Dashboard/HR/Index';
 import EmployeesPage from '../Pages/Dashboard/HR/Employee';
 import Department from '../Pages/Dashboard/HR/Department';
+import AttendancePage from '../Pages/Dashboard/HR/Attendance';
+import { LeaveRequestSystem } from '../Pages/Dashboard/HR/LeaveRequestPage';
+import PayRollPage from '../Pages/Dashboard/HR/PayRollPage';
 
 const router = createBrowserRouter([
     {
@@ -27,15 +30,15 @@ const router = createBrowserRouter([
             },
             {
                 path: "/attendance",
-                element: <div className="p-6">Attendance Page - Coming Soon</div>
+                element: <AttendancePage />
             },
             {
                 path: "/leave",
-                element: <div className="p-6">Leave Requests Page - Coming Soon</div>
+                element: <LeaveRequestSystem />
             },
             {
                 path: "/payroll",
-                element: <div className="p-6">Payroll Page - Coming Soon</div>
+                element: <PayRollPage />
             },
             {
                 path: "/performance",
