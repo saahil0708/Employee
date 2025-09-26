@@ -6,6 +6,9 @@ import Department from '../Pages/Dashboard/HR/Department';
 import AttendancePage from '../Pages/Dashboard/HR/Attendance';
 import { LeaveRequestSystem } from '../Pages/Dashboard/HR/LeaveRequestPage';
 import PayRollPage from '../Pages/Dashboard/HR/PayRollPage';
+import ReportsPage from '../Pages/Dashboard/HR/Reports';
+import SettingsPage from '../Pages/Dashboard/HR/Settings';
+import DocumentsPage from '../Pages/Dashboard/HR/Documents';
 
 const router = createBrowserRouter([
     {
@@ -46,7 +49,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/documents",
-                element: <div className="p-6">Documents Page - Coming Soon</div>
+                element: <DocumentsPage />
             },
             {
                 path: "/recognition",
@@ -58,11 +61,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/reports",
-                element: <div className="p-6">Reports Page - Coming Soon</div>
+                element: <ReportsPage />
             },
             {
                 path: "/settings",
-                element: <div className="p-6">Settings Page - Coming Soon</div>
+                element: <SettingsPage />
             },
             {
                 path: "/profile",

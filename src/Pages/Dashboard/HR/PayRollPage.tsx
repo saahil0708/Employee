@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { 
-  DollarSign, 
-  Users, 
-  Calendar, 
-  Download, 
-  Filter, 
-  Search, 
-  Eye, 
+import {
+  DollarSign,
+  Users,
+  Calendar,
+  Download,
+  Search,
+  Eye,
   MoreHorizontal,
   TrendingUp,
   TrendingDown,
@@ -15,8 +14,9 @@ import {
   AlertCircle,
   Building2,
   CreditCard,
-  Bank,
-  Wallet
+  Landmark,
+  Wallet,
+  ChevronDown
 } from 'lucide-react';
 
 interface EmployeePayroll {
@@ -130,10 +130,10 @@ const PayrollPage: React.FC = () => {
 
   const filteredData = payrollData.filter(employee => {
     const matchesSearch = employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         employee.employeeId.toLowerCase().includes(searchTerm.toLowerCase());
+      employee.employeeId.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesDepartment = selectedDepartment === 'All' || employee.department === selectedDepartment;
     const matchesStatus = selectedStatus === 'All' || employee.status === selectedStatus;
-    
+
     return matchesSearch && matchesDepartment && matchesStatus;
   });
 
@@ -178,7 +178,7 @@ const PayrollPage: React.FC = () => {
   const getPaymentMethodIcon = (method: string) => {
     switch (method) {
       case 'Direct Deposit':
-        return <Bank size={14} className="text-blue-500" />;
+        return <Landmark size={14} className="text-blue-500" />;
       case 'Bank Transfer':
         return <CreditCard size={14} className="text-green-500" />;
       case 'Check':
@@ -197,7 +197,7 @@ const PayrollPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50/50 p-6">
-      <div className="max-w-7xl mx-auto space-y-6">
+      <div className="max-w-8xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between">
           <div>
@@ -205,11 +205,11 @@ const PayrollPage: React.FC = () => {
             <p className="text-gray-600 mt-2">Manage employee payments and payroll processing</p>
           </div>
           <div className="flex items-center gap-3 mt-4 lg:mt-0">
-            <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition-all duration-200">
+            <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200">
               <Download size={16} />
               Export Report
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-all duration-200">
+            <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-all duration-200">
               <DollarSign size={16} />
               Process Payroll
             </button>
@@ -297,26 +297,32 @@ const PayrollPage: React.FC = () => {
                   className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
-              
-              <select 
-                value={selectedDepartment}
-                onChange={(e) => setSelectedDepartment(e.target.value)}
-                className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                {departments.map(dept => (
-                  <option key={dept} value={dept}>{dept} Department</option>
-                ))}
-              </select>
 
-              <select 
-                value={selectedStatus}
-                onChange={(e) => setSelectedStatus(e.target.value)}
-                className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                {statuses.map(status => (
-                  <option key={status} value={status}>{status}</option>
-                ))}
-              </select>
+              <div className="relative">
+                <select
+                  value={selectedDepartment}
+                  onChange={(e) => setSelectedDepartment(e.target.value)}
+                  className="appearance-none px-3 py-2 pr-10 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  {departments.map(dept => (
+                    <option key={dept} value={dept}>{dept} Department</option>
+                  ))}
+                </select>
+                <ChevronDown size={16} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" />
+              </div>
+
+              <div className="relative">
+                <select
+                  value={selectedStatus}
+                  onChange={(e) => setSelectedStatus(e.target.value)}
+                  className="appearance-none px-3 py-2 pr-10 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  {statuses.map(status => (
+                    <option key={status} value={status}>{status}</option>
+                  ))}
+                </select>
+                <ChevronDown size={16} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" />
+              </div>
             </div>
 
             <div className="flex items-center gap-3">

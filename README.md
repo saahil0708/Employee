@@ -1,73 +1,110 @@
-# React + TypeScript + Vite
+# 🚀 Employee Management System (EMS)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The **Employee Management System (EMS)** is a comprehensive web application for managing employees, departments, payroll, attendance, performance, and more.  
+Built with **React + Supabase**, it provides authentication, role-based access, secure file storage, and real-time features.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Features
 
-## React Compiler
+- **Authentication & Role-Based Access**
+  - Secure login with Supabase Auth (Email/Password, OAuth, Magic Link)
+  - Roles: **Admin, HR, Employee**
+  - JWT sessions with Row Level Security (RLS)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Employee Management**
+  - CRUD operations for employee records
+  - Personal profile with documents & contact details
+  - Upload ID proofs, resumes, and certificates to Supabase Storage
 
-## Expanding the ESLint configuration
+- **Department & Role Management**
+  - Create/manage departments
+  - Assign employees to roles (Developer, Manager, Intern, etc.)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Attendance & Leave Management**
+  - Daily attendance tracking
+  - Leave requests with approval/rejection flow
+  - Leave balance & holiday calendar
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Payroll System**
+  - Store salary structure
+  - Auto-calculation (basic, deductions, overtime, bonus)
+  - Payslip generation (PDF)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Performance & Appraisals**
+  - Define goals & KPIs
+  - Record appraisal reviews
+  - Track promotions
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Reports & Dashboard**
+  - Employee statistics per department
+  - Salary expenditure trends
+  - Attendance insights
+  - Export CSV/PDF
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Notifications & Communication**
+  - Email notifications (leave approvals, announcements)
+  - System-wide announcements
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Additional Features**
+  - Employee Self-Service Portal (ESSP)
+  - Audit logs for compliance
+  - Slack/Teams/Email integrations
+  - Mobile app support with React Native / Flutter
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React + Vite  
+- **Backend:** Supabase (PostgreSQL, Auth, Storage, Edge Functions)  
+- **UI Library:** TailwindCSS, ShadCN UI (optional)  
+- **Charts & Reports:** Recharts / Chart.js  
+- **PDF Generation:** Node.js / Next.js API routes  
+
+
+---
+
+## ⚡ Supabase Integration
+
+- **Authentication:** Role-based access using Supabase Auth  
+- **Database:** PostgreSQL with relational schema  
+- **Storage:** Employee document uploads (ID, certificates, payslips)  
+- **Real-Time:** Live dashboards and attendance updates  
+- **Edge Functions:** Automated notifications and triggers  
+
+---
+
+## 📈 Development Plan
+
+1. **Phase 1:** Authentication + Employee CRUD  
+2. **Phase 2:** Department & Role Management  
+3. **Phase 3:** Attendance & Leave System  
+4. **Phase 4:** Payroll System  
+5. **Phase 5:** Reports & Dashboard  
+6. **Phase 6 (Optional):** Performance & Project Management  
+7. **Final Phase:** Notifications, Settings & UI Polish  
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v18+ recommended)  
+- Supabase account → [https://supabase.com](https://supabase.com)  
+
+### Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/Employee.git
+cd employee-management-system
+
+# Install dependencies
+npm install
+
+# Add your Supabase credentials
+cp .env.example .env.local
+
+# Start development server
+npm run dev

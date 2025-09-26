@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Building2, Users, TrendingUp, MoreHorizontal, Calendar, Clock, User, CheckCircle, XCircle, Filter } from 'lucide-react';
+import { Building2, Users, TrendingUp, MoreHorizontal, Calendar, Clock, User, CheckCircle, XCircle, Filter, ChevronDown } from 'lucide-react';
 
 interface LeaveRequest {
   id: string;
@@ -168,26 +168,32 @@ const LeaveRequestSystem: React.FC = () => {
       <div className="flex flex-col sm:flex-row gap-4 mb-6">
         <div className="flex items-center gap-2">
           <Filter size={16} className="text-gray-400" />
-          <select 
-            value={filter}
-            onChange={(e) => setFilter(e.target.value as any)}
-            className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="All">All Status</option>
-            <option value="Pending">Pending</option>
-            <option value="Approved">Approved</option>
-            <option value="Rejected">Rejected</option>
-          </select>
+          <div className="relative">
+            <select 
+              value={filter}
+              onChange={(e) => setFilter(e.target.value as any)}
+              className="appearance-none px-3 py-2 pr-10 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="All">All Status</option>
+              <option value="Pending">Pending</option>
+              <option value="Approved">Approved</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+            <ChevronDown size={16} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" />
+          </div>
         </div>
-        <select 
-          value={selectedDepartment}
-          onChange={(e) => setSelectedDepartment(e.target.value)}
-          className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          {departments.map(dept => (
-            <option key={dept} value={dept}>{dept} Department</option>
-          ))}
-        </select>
+        <div className="relative">
+          <select 
+            value={selectedDepartment}
+            onChange={(e) => setSelectedDepartment(e.target.value)}
+            className="appearance-none px-3 py-2 pr-10 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            {departments.map(dept => (
+              <option key={dept} value={dept}>{dept} Department</option>
+            ))}
+          </select>
+          <ChevronDown size={16} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" />
+        </div>
       </div>
 
       {/* Leave Requests List */}
@@ -220,13 +226,13 @@ const LeaveRequestSystem: React.FC = () => {
                   <div className="flex items-center gap-2">
                     <button 
                       onClick={() => handleApprove(request.id)}
-                      className="px-3 py-1 bg-green-500 text-white rounded-lg text-sm hover:bg-green-600 transition-colors"
+                      className="px-3 py-1 bg-green-500 text-white rounded-md text-sm hover:bg-green-600 transition-colors"
                     >
                       Approve
                     </button>
                     <button 
                       onClick={() => handleReject(request.id)}
-                      className="px-3 py-1 bg-red-500 text-white rounded-lg text-sm hover:bg-red-600 transition-colors"
+                      className="px-3 py-1 bg-red-500 text-white rounded-md text-sm hover:bg-red-600 transition-colors"
                     >
                       Reject
                     </button>
