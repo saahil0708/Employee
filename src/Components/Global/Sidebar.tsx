@@ -34,7 +34,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
         { id: 'leave', label: 'Leave Requests', icon: Calendar, badge: '8', route: '/leave' },
         { id: 'payroll', label: 'Payroll', icon: DollarSign, badge: null, route: '/payroll' },
         { id: 'documents', label: 'Documents', icon: FileText, badge: null, route: '/documents' },
-        { id: 'communication', label: 'Messages', icon: MessageSquare, badge: '3', route: '/communication' },
+        // { id: 'communication', label: 'Messages', icon: MessageSquare, badge: '3', route: '/communication' },
         { id: 'reports', label: 'Reports', icon: BarChart3, badge: null, route: '/reports' },
     ];
 

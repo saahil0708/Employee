@@ -9,6 +9,8 @@ import PayRollPage from '../Pages/Dashboard/HR/PayRollPage';
 import ReportsPage from '../Pages/Dashboard/HR/Reports';
 import SettingsPage from '../Pages/Dashboard/HR/Settings';
 import DocumentsPage from '../Pages/Dashboard/HR/Documents';
+import ProfilePage from '../Pages/Dashboard/HR/Profile';
+import NotificationsPage from '../Pages/Dashboard/HR/Notifications';
 
 const router = createBrowserRouter([
     {
@@ -69,7 +71,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/profile",
-                element: <div className="p-6">Profile Page - Coming Soon</div>
+                element: <ProfilePage />
+            },
+            {
+                path: "/notifications",
+                element: <NotificationsPage />
             },
             {
                 path: "*",

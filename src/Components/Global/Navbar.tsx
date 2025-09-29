@@ -14,6 +14,7 @@ import {
   Globe,
   MessageSquare
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface NavbarProps {
   onAddEmployee?: () => void;
@@ -112,7 +113,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAddEmployee }) => {
             </button>
 
             {/* Theme Toggle */}
-            <button 
+            <button
               onClick={() => setIsDarkMode(!isDarkMode)}
               className="hidden lg:block p-2.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-all duration-200"
             >
@@ -152,16 +153,14 @@ const Navbar: React.FC<NavbarProps> = ({ onAddEmployee }) => {
                   {notifications.map((notification) => (
                     <div
                       key={notification.id}
-                      className={`px-4 py-3 hover:bg-gray-50 cursor-pointer border-l-4 ${
-                        notification.unread ? 'border-blue-500 bg-blue-50/30' : 'border-transparent'
-                      }`}
+                      className={`px-4 py-3 hover:bg-gray-50 cursor-pointer border-l-4 ${notification.unread ? 'border-blue-500 bg-blue-50/30' : 'border-transparent'
+                        }`}
                     >
                       <div className="flex items-start gap-3">
-                        <div className={`w-2 h-2 rounded-full mt-2 ${
-                          notification.type === 'leave' ? 'bg-orange-500' :
-                          notification.type === 'birthday' ? 'bg-pink-500' :
-                          notification.type === 'payroll' ? 'bg-green-500' : 'bg-blue-500'
-                        }`}></div>
+                        <div className={`w-2 h-2 rounded-full mt-2 ${notification.type === 'leave' ? 'bg-orange-500' :
+                            notification.type === 'birthday' ? 'bg-pink-500' :
+                              notification.type === 'payroll' ? 'bg-green-500' : 'bg-blue-500'
+                          }`}></div>
                         <div className="flex-1 min-w-0">
                           <p className="font-medium text-gray-900 text-sm">{notification.title}</p>
                           <p className="text-gray-600 text-sm mt-1">{notification.message}</p>
@@ -172,9 +171,11 @@ const Navbar: React.FC<NavbarProps> = ({ onAddEmployee }) => {
                   ))}
                 </div>
                 <div className="px-4 py-3 border-t border-gray-100">
-                  <button className="w-full text-center text-sm text-blue-600 hover:text-blue-700 font-medium">
-                    View all notifications
-                  </button>
+                  <Link to="/notifications">
+                    <button className="w-full text-center text-sm text-blue-600 hover:text-blue-700 font-medium">
+                      View all notifications
+                    </button>
+                  </Link>
                 </div>
               </div>
             )}
@@ -193,9 +194,8 @@ const Navbar: React.FC<NavbarProps> = ({ onAddEmployee }) => {
                 <p className="font-medium text-gray-900 text-sm">John Doe</p>
                 <p className="text-xs text-gray-500">HR Manager</p>
               </div>
-              <ChevronDown size={16} className={`hidden sm:block text-gray-400 transition-transform duration-200 ${
-                showProfileMenu ? 'rotate-180' : ''
-              }`} />
+              <ChevronDown size={16} className={`hidden sm:block text-gray-400 transition-transform duration-200 ${showProfileMenu ? 'rotate-180' : ''
+                }`} />
             </button>
 
             {/* Profile Dropdown Menu */}
@@ -213,22 +213,26 @@ const Navbar: React.FC<NavbarProps> = ({ onAddEmployee }) => {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="py-2">
                   <button className="w-full px-4 py-2 text-left hover:bg-gray-50 flex items-center gap-3 text-gray-700">
                     <UserCircle size={18} />
-                    <span className="text-sm">My Profile</span>
+                    <Link to="/profile">
+                      <span className="text-sm">My Profile</span>
+                    </Link>
                   </button>
                   <button className="w-full px-4 py-2 text-left hover:bg-gray-50 flex items-center gap-3 text-gray-700">
                     <Settings size={18} />
-                    <span className="text-sm">Account Settings</span>
+                    <Link to="/settings">
+                      <span className="text-sm">Account Settings</span>
+                    </Link>
                   </button>
-                  <button className="w-full px-4 py-2 text-left hover:bg-gray-50 flex items-center gap-3 text-gray-700">
+                  {/* <button className="w-full px-4 py-2 text-left hover:bg-gray-50 flex items-center gap-3 text-gray-700">
                     <Globe size={18} />
                     <span className="text-sm">Language & Region</span>
-                  </button>
+                  </button> */}
                 </div>
-                
+
                 <div className="border-t border-gray-100 py-2">
                   <button className="w-full px-4 py-2 text-left hover:bg-gray-50 flex items-center gap-3 text-red-600">
                     <LogOut size={18} />
