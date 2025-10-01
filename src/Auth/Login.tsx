@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // <-- Add this import
 import SVG from '../assets/SVG/Computer login-amico.svg';
 import ClickSpark from '../Components/UI/ClickSpark';
+import Logo from '../assets/Images/Logo.png';
 import {
     TextField,
     Button,
@@ -16,7 +18,6 @@ import {
     Google as GoogleIcon,
     Visibility,
     VisibilityOff,
-    PeopleAlt
 } from '@mui/icons-material';
 
 const Login: React.FC = () => {
@@ -26,19 +27,24 @@ const Login: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isGoogleLoading, setIsGoogleLoading] = useState(false);
     const [error, setError] = useState('');
+    const navigate = useNavigate(); // <-- Add this line
 
     const handleEmailLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
         setIsLoading(true);
 
-        // Simulate login process
+        // Dummy login check
         try {
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            // Handle successful login here
-            console.log('Login successful:', { email, password });
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            if (email === 'hr123@gmail.com' && password === '123456') {
+                localStorage.setItem('isLoggedIn', 'true'); // <-- Add this line
+                navigate('/'); // or navigate('/dashboard') if that's your dashboard route
+            } else {
+                setError('Invalid email or password. Please try again.');
+            }
         } catch (err) {
-            setError('Invalid email or password. Please try again.');
+            setError('Something went wrong. Please try again.');
         } finally {
             setIsLoading(false);
         }
@@ -124,43 +130,19 @@ const Login: React.FC = () => {
                             flexShrink: 0
                         }}
                     >
-                        {/* Logo and Title */}
+                        {/* Logo */}
                         <Box sx={{ textAlign: 'left', mb: 6 }}>
                             <Box
+                                component="img"
+                                src={Logo}
+                                alt="EmpSync Logo"
                                 sx={{
-                                    display: 'inline-flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    width: 60,
-                                    height: 60,
-                                    borderRadius: 2,
-                                    background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
-                                    mb: 3,
-                                    boxShadow: '0 8px 32px rgba(37, 99, 235, 0.3)'
+                                    height: 36,
+                                    width: 'auto',
+                                    mb: 2,
+                                    objectFit: 'contain'
                                 }}
-                            >
-                                <PeopleAlt sx={{ color: 'white', fontSize: 28 }} />
-                            </Box>
-                            <Typography
-                                variant="h4"
-                                sx={{
-                                    fontWeight: 700,
-                                    color: '#1f2937',
-                                    mb: 1,
-                                    fontFamily: 'Inter, sans-serif'
-                                }}
-                            >
-                                EmpSync
-                            </Typography>
-                            <Typography
-                                variant="body1"
-                                sx={{
-                                    color: '#6b7280',
-                                    fontFamily: 'Inter, sans-serif'
-                                }}
-                            >
-                                Employee Management System
-                            </Typography>
+                            />
                         </Box>
 
                         {/* Error Alert */}

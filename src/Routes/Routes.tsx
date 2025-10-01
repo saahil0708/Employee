@@ -1,5 +1,6 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Layout from '../Layout/Layout';
+import Login from '../Auth/Login';
 import HRDashboard from '../Pages/Dashboard/HR/Index';
 import EmployeesPage from '../Pages/Dashboard/HR/Employee';
 import Department from '../Pages/Dashboard/HR/Department';
@@ -12,10 +13,20 @@ import DocumentsPage from '../Pages/Dashboard/HR/Documents';
 import ProfilePage from '../Pages/Dashboard/HR/Profile';
 import NotificationsPage from '../Pages/Dashboard/HR/Notifications';
 
+// Protected Route Component
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    return isLoggedIn ? <>{children}</> : <Navigate to="/auth/login" replace />;
+};
+
 const router = createBrowserRouter([
     {
+        path: "/auth/login",
+        element: <Login />
+    },
+    {
         path: "/",
-        element: <Layout />,
+        element: <ProtectedRoute><Layout /></ProtectedRoute>,
         children: [
             {
                 path: "/",
